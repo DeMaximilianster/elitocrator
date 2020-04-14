@@ -5,8 +5,8 @@ import csv
 sides_list = ['com', 'adm', 'cod', 'con', 'mem', 'tim']
 names_list = ['Комитет', 'Админосостав', 'Кодеры', 'Контент-мейкеры', 'Участники', 'Тимка']
 
-names_to_sides_dict = {i: j for i, j in zip(names_list, sides_list)}  # + {'Контентмейкеры': 'con'}
-sides_to_names_dict = {i: j for i, j in zip(sides_list, names_list)}
+names_to_sides_dict = dict(zip(names_list, sides_list)) # + {'Контентмейкеры': 'con'}
+sides_to_names_dict = dict(zip(sides_list, names_list))
 
 
 class ChoiceQuery:
@@ -112,7 +112,7 @@ class Game:
 
         request = self.sides[side].make_request(self.iface)
         self.last_side = side
-        
+
         approved = yield ChoiceQuery({'+': True, '-': False}, False)
         self.process_request(request, approved)
         self.activity -= self.activity_fall
