@@ -111,6 +111,8 @@ class Game:
         side = yield ChoiceQuery(choice_dict)
 
         request = self.sides[side].make_request(self.iface)
+        self.last_side = side
+        
         approved = yield ChoiceQuery({'+': True, '-': False}, False)
         self.process_request(request, approved)
         self.activity -= self.activity_fall
